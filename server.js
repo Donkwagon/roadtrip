@@ -3,7 +3,6 @@ var bodyParser =      require("body-parser");
 var mongoose =        require('mongoose');
 var http =            require('http');
 
-
 //////////////////////////////////////////
 //Initialize app and start express server
 var app = express();
@@ -32,15 +31,9 @@ global.db = mongoose.createConnection(MongoDbConStr);
 // io.sockets.on('connection',(socket) => {console.log('client connect');});
 // global.io = io;
 
-
 //////////////////////////////////////////
 //Routing
-// const queen =         require('./server/swarm/queen');
-// const system =        require('./server/system/system');
-// const facility =      require('./server/facility/facility');
-
-// app.use('/queen',queen);
-// app.use('/system',system);
-// app.use('/facility',facility); // facility is a backend system that support the development logistics
+const apis =         require('./server/apis');
+app.use('/apis',apis);
 
 module.exports = app;

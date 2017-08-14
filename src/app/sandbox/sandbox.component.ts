@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
+import { CrawlerService } from '../@core/services/crawler.service';
+
 @Component({
   selector: 'app-sandbox',
   templateUrl: './sandbox.component.html',
-  styleUrls: ['./sandbox.component.scss']
+  styleUrls: ['./sandbox.component.scss'],
+  providers: [ CrawlerService ]
 })
 
 export class SandboxComponent implements OnInit {
 
-  constructor() { }
+  constructor(private crawlerService: CrawlerService) { }
 
   ngOnInit() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ua3doYW4iLCJhIjoiY2l6OHA1MDZtMDA0cDJxcW9vdXM5OHFpaCJ9.i9qniS0Lz-hc17UGUmFfYw';
@@ -24,6 +27,13 @@ export class SandboxComponent implements OnInit {
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl());
 
+    this.commenceProbing();
+  }
+
+  commenceProbing() {
+    this.crawlerService.commenceProbing().then(res => {
+      console.log(res);
+    });
   }
 
 }

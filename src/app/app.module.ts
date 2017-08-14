@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule }                        from '@angular/http';
+
 
 import { LocationStrategy }                  from '@angular/common';
 import { HashLocationStrategy }              from '@angular/common';
@@ -16,6 +18,7 @@ import { SandboxComponent } from './sandbox/sandbox.component';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     AppRoutingModule
   ],
   providers: [
