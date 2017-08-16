@@ -11,12 +11,18 @@ import { AppRoutingModule }                  from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { DataComponent } from './data/data.component';
+import { ArtistsComponent } from './artists/artists.component';
+import { VenuesComponent } from './venues/venues.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SandboxComponent,
-    DataComponent
+    DataComponent,
+    ArtistsComponent,
+    VenuesComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
