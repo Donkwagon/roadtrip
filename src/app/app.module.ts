@@ -10,11 +10,13 @@ import { AppRoutingModule }                  from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { DataComponent } from './data/data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SandboxComponent
+    SandboxComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,

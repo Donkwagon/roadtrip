@@ -16,6 +16,27 @@ export class CrawlerService {
                  .catch(this.handleError);
     }
 
+    rakeArtistList(): Promise<String[] | void> {
+      return this.http.get(this.CrawlersUrl + "/rake")
+                 .toPromise()
+                 .then(response => response.json() as String[])
+                 .catch(this.handleError);
+    }
+
+    getArtistInfo(): Promise<String[] | void> {
+      return this.http.get(this.CrawlersUrl + "/artistinfo")
+                 .toPromise()
+                 .then(response => response.json() as String[])
+                 .catch(this.handleError);
+    }
+
+    getUpcomingEvents(): Promise<String[] | void> {
+      return this.http.get(this.CrawlersUrl + "/upcomingevents")
+                 .toPromise()
+                 .then(response => response.json() as String[])
+                 .catch(this.handleError);
+    }
+
     private handleError (error: any) {
       let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
