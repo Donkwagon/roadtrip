@@ -6,6 +6,16 @@ body{
     font-family: 'Saira', sans-serif;
 }
 
+////////////////////////////////////////////////////////////////////////
+/* Frequently used css properties */
+.r{display:flex;flex-direction:row;}.c{display:flex;flex-direction:column;}.wr{flex-wrap:wrap;}
+.f1{display:flex;flex:1;}.f162{display:flex;flex:1.62;}.f2{display:flex;flex:2;}.s0{flex-shrink:0;}
+.aie{align-items:flex-end;}
+.ac{text-align:center;}.al{text-align:left;}.ar{text-align:right;}
+.w100{width:100%;}.h100{height:100%;}
+.ofys{overflow-y:scroll;}
+.fe{justify-content:flex-end;}
+
 h2 {
   text-transform: uppercase;
   font-size: 16px;
@@ -24,10 +34,10 @@ ul {
   padding: 0;
   text-align: center;
 }
-  li {
-    display: inline-block;
-    margin: 0 20px;
-  }
+li {
+  display: inline-block;
+  margin: 0 20px;
+}
 
 
 /* Base Button Style */
@@ -216,6 +226,7 @@ ul {
     border-radius: 0 0 40% 40% / 0 0 30% 30%;
   }
 }
+
 .paper-curl-right {
   &:before {
     display: none;
