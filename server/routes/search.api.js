@@ -9,9 +9,10 @@ function handleError(res, reason, message, code) {
 }
 
 search.get("/:query", function(req, res) {
+  
   db.collection(ARTIST_COLLECTION).find( { $text: { $search: req.params.query } }).toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to get securities.");
+      handleError(res, err.message, "Failed to get artists.");
     } else {
       res.status(200).json(docs);
     }

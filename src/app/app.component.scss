@@ -1,14 +1,70 @@
+@import '../_theme';
 
-.app-panel{
-    position:fixed;
-    top:1em;
-    left:1em;
-    z-index:50;
-    padding:0.5em 1em;
-    background-color:rgba(12,12,12,0.8);
+.app-interface{
+    position: fixed;
+    top:0;left:0;
+    width:100%;
+    height:48px;
+    //background-color:#222;
+    z-index:49;
+    align-items:center;
+    background-image:linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.1));    
 
-    &:hover{
-        cursor:pointer;
-        background-color:rgba(12,12,12,0.7);
+    .app-nav{
+        align-items:center;
+        padding:0 0.5em;
+        margin:0 0.5em;
+        border-radius:1em;
+
+        &:hover{
+            cursor: pointer;
+            background-color:#333;
+        }
     }
+
+    .app-search-wrapper{
+        align-items:center;
+
+        #app-search-input{
+            height:1.5em;
+            font-size:1rem;
+            border-radius:1em;
+            padding:0 1em;
+            border:none;
+            font-family:$font-stack;
+            
+            &:focus{
+                outline:none;
+            }
+        }
+    }
+
+}
+
+.search-result-interface{
+    position: fixed;
+    top:3em;
+    left:1em;
+    width:800px;
+    height: 500px;
+    background-color:rgba(0,0,0,0.2);
+    z-index:48;
+
+    padding:0.5em;
+
+    .search-result-item{
+        align-items:flex-start;
+        padding:0.5em;
+
+        img{
+            width:10em;
+            height:10em;
+        }
+
+        .item-info{
+            padding:0.5em;
+            background-color:rgba(0,0,0,0.7);
+        }
+    }
+
 }
