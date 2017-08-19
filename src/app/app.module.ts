@@ -16,6 +16,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { VenuesComponent } from './venues/venues.component';
 import { EventsComponent } from './events/events.component';
 import { ArtistComponent } from './artists/artist/artist.component';
+import { ArtistsOverallComponent } from './artists/artists-overall/artists-overall.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ArtistComponent } from './artists/artist/artist.component';
     ArtistsComponent,
     VenuesComponent,
     EventsComponent,
-    ArtistComponent
+    ArtistComponent,
+    ArtistsOverallComponent
   ],
   imports: [
     BrowserModule,
