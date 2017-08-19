@@ -1,19 +1,30 @@
-<p>
-  artist works!
-</p>
 <div *ngIf="artist">
-    <p>
-      {{artist.name}}
-    </p>
-    <p>
-      {{artist.facebook_page_url}}
-    </p>
-    <p>
-      {{artist.upcoming_event_count}}
-    </p>
+  <img class="artist-background-image" [src]="artist.image_url"/>
+  <div class="artist-interface r">
+    <div class="artist-info-wrapper c">
+      <img class="artist-profile-image" [src]="artist.image_url"/>
+      <p>
+        {{artist.name}} | {{artist.upcoming_event_count}} | {{artist.tracker_count}}
+      </p>
+    </div>
+    <div class="events-wrapper">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Venue</th>
+          <th>Location</th>
+          <th>Tickets</th>
+        </tr>
+        <tr *ngFor="let event of events">
+          <td>{{event.datetime | date:'MMM d'}}</td>
+          <td>{{event.venue.name}}</td>
+          <td>{{event.venue.city}}, {{event.venue.region}}</td>
+          <td>Tickets</td>
+        </tr>
+      </table>
+    </div>
 
-    <p *ngFor="let event of events">
-      {{event.datetime | date:'medium'}} {{event.venue.region}}  {{event.venue.name}} 
-    </p>
+  </div>
+
 
 </div>
