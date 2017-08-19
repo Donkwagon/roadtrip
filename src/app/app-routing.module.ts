@@ -11,7 +11,7 @@ import { EventsComponent } from './events/events.component';
 import { ArtistComponent } from './artists/artist/artist.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sandbox', pathMatch: 'full'},
+  { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: 'sandbox', component: SandboxComponent},
   { path: 'data', component: DataComponent},
   { path: 'artists', component: ArtistsComponent, children: [

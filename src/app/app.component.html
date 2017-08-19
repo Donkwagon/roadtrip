@@ -1,32 +1,21 @@
 
-
 <div class="app-interface r">
 
-    <div class="app-nav r">
-        RODIE
-    </div>
+    <a routerLink="/" class="app-nav r">RODIE</a>
+
     <div class="app-search-wrapper r">
         <input id="app-search-input" placeholder="search artists" [(ngModel)]="searchQuery" (keyup)="search()" spellcheck="false"/>
     </div>
-    <a routerLink="/artists" class="app-nav r">
-        Artists
-    </a>
-    <div class="app-nav r">
-        Events
-    </div>
-    <div class="app-nav r">
-        Venues
-    </div>
-    <div class="app-nav r">
-        Countries
-    </div>
-    <div class="app-nav r">
-        Regions
-    </div>
-    <div class="app-nav r">
-        Cities
-    </div>
+
+    <a routerLink="/artists" class="app-nav r">Artists</a>
+    <a routerLink="/" class="app-nav r">Events</a>
+    <a routerLink="/" class="app-nav r">Venues</a>
+    <a routerLink="/" class="app-nav r">Countries</a>
+    <a routerLink="/" class="app-nav r">Regions</a>
+    <a routerLink="/" class="app-nav r">Cities</a>
+
     <div class="f1"></div>
+
     <div class="app-nav r">
         <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/20882689_10209383461294031_8391804898909592920_n.jpg?oh=862383b21ca663b287f397f567b19382&oe=5A2635AB"/>
         &nbsp;Han
@@ -34,7 +23,7 @@
     
 </div>
 
-<div class="search-result-interface r">
+<div class="search-result-interface r" *ngIf="searchQuery">
 
     <a href="/#/artists/{{item.name}}" class="search-result-item c" *ngFor="let item of resultList | async">
         <img [src]="item.thumb_url"/>

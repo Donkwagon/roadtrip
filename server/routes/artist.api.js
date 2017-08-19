@@ -12,7 +12,7 @@ function handleError(res, reason, message, code) {
 }
 
 artists.get("", function(req, res) {
-  db.collection(ARTIST_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(ARTIST_COLLECTION).find({}).sort( { tracker_count: -1 } ).limit(20).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get Artists.");
     } else {
