@@ -3,7 +3,7 @@
 <div class="app-interface r">
 
     <div class="app-nav r">
-        ROADI
+        RODIE
     </div>
     <div class="app-search-wrapper r">
         <input id="app-search-input" placeholder="search artists" [(ngModel)]="searchQuery" (keyup)="search()" spellcheck="false"/>
@@ -17,17 +17,31 @@
     <div class="app-nav r">
         Venues
     </div>
+    <div class="app-nav r">
+        Countries
+    </div>
+    <div class="app-nav r">
+        Regions
+    </div>
+    <div class="app-nav r">
+        Cities
+    </div>
+    <div class="f1"></div>
+    <div class="app-nav r">
+        <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/20882689_10209383461294031_8391804898909592920_n.jpg?oh=862383b21ca663b287f397f567b19382&oe=5A2635AB"/>
+        &nbsp;Han
+    </div>
     
 </div>
 
 <div class="search-result-interface r">
 
-    <div class="search-result-item c" *ngFor="let item of resultList | async">
+    <a href="/#/artists/{{item.name}}" class="search-result-item c" *ngFor="let item of resultList | async">
         <img [src]="item.thumb_url"/>
         <div class="item-info">
             <b>{{item.name}}</b>
         </div>
-    </div>
+    </a>
 
 </div>
 

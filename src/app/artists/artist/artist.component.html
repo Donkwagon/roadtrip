@@ -1,0 +1,19 @@
+<p>
+  artist works!
+</p>
+<div *ngIf="artist">
+    <p>
+      {{artist.name}}
+    </p>
+    <p>
+      {{artist.facebook_page_url}}
+    </p>
+    <p>
+      {{artist.upcoming_event_count}}
+    </p>
+
+    <p *ngFor="let event of events">
+      {{event.datetime | date:'medium'}} {{event.venue.region}}  {{event.venue.name}} 
+    </p>
+
+</div>

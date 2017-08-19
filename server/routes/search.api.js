@@ -9,8 +9,11 @@ function handleError(res, reason, message, code) {
 }
 
 search.get("/:query", function(req, res) {
-  
-  db.collection(ARTIST_COLLECTION).find( { $text: { $search: req.params.query } }).toArray(function(err, docs) {
+  // db.collection(ARTIST_COLLECTION).ensureIndex( 
+  //   { name: "text" } ,
+  //   { match: "partial" }
+  // )
+  db.collection(ARTIST_COLLECTION).find( { $text: { $search: req.params.query} }).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get artists.");
     } else {

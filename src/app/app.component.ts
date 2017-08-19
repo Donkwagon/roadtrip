@@ -27,6 +27,7 @@ import 'rxjs/add/operator/switchMap';
 export class AppComponent {
   resultList: Observable<any[]>;
   searchQuery: string;
+  location: any;
   private searchInput = new Subject<string>();
 
   title = 'app';
@@ -34,6 +35,7 @@ export class AppComponent {
   constructor(private searchService: SearchService) { 
     console.log("wer");
     console.log(mapboxgl);
+    this.getLocation();
     
     this.resultList = this.searchInput
     .debounceTime(300)
@@ -48,6 +50,14 @@ export class AppComponent {
   search(): void {
     this.searchInput.next(this.searchQuery);
     console.log(this.searchQuery);
+  }
+  getLocation() {
+    if(navigator.geolocation){
+       navigator.geolocation.getCurrentPosition(position => {
+         this.location = position.coords;
+         console.log(position.coords); 
+       });
+    }
   }
 
 }

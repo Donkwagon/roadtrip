@@ -15,6 +15,7 @@ import { DataComponent } from './data/data.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { VenuesComponent } from './venues/venues.component';
 import { EventsComponent } from './events/events.component';
+import { ArtistComponent } from './artists/artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EventsComponent } from './events/events.component';
     DataComponent,
     ArtistsComponent,
     VenuesComponent,
-    EventsComponent
+    EventsComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
