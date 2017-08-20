@@ -16,12 +16,14 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [SearchService ]
+  providers: [ SearchService ]
 })
 
 export class AppComponent {
@@ -32,10 +34,15 @@ export class AppComponent {
 
   title = 'app';
 
-  constructor(private searchService: SearchService) { 
+  user: Observable<firebase.User>;
+  
+
+  constructor(public afAuth: AngularFireAuth, private searchService: SearchService) { 
     console.log("wer");
     console.log(mapboxgl);
     this.getLocation();
+
+    this.user = afAuth.authState;
     
     this.resultList = this.searchInput
     .debounceTime(300)
@@ -51,6 +58,7 @@ export class AppComponent {
     this.searchInput.next(this.searchQuery);
     console.log(this.searchQuery);
   }
+
   getLocation() {
     if(navigator.geolocation){
        navigator.geolocation.getCurrentPosition(position => {
@@ -58,6 +66,14 @@ export class AppComponent {
          console.log(position.coords); 
        });
     }
+  }
+
+  login() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 
 }

@@ -2,12 +2,13 @@
 .artist{
     align-items:center;
     padding:0.5em;
-    background-color:#eee;
+    background-color:rgba(255,255,255,0.8);
     color:#333;
     border-bottom:rgba(0,0,0,0.5) solid 1px;
+    border-radius:2px;
 
     .artist-thumb{
-        height:2em;width:2em;
-        border-radius:2px;
+        height:3em;width:3em;
+        border-radius:3px;
     }
 }

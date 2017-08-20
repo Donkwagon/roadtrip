@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule }                        from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 
 import { LocationStrategy }                  from '@angular/common';
@@ -34,7 +38,9 @@ import { ArtistsOverallComponent } from './artists/artists-overall/artists-overa
     HttpModule,
     FormsModule,
     AppRoutingModule,
-    
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }],
