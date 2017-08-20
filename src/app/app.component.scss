@@ -47,6 +47,11 @@
 
 }
 
+#map{
+    @extend .full-screen;
+    z-index:10;
+}
+
 .search-result-interface{
     position: fixed;
     top:3em;

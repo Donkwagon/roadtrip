@@ -8,7 +8,9 @@ body{
 }
 
 .page{
+  @extend .full-screen;
   padding-top:48px;
+  z-index:11;
 }
 
 a:link {color: inherit;text-decoration:none;}

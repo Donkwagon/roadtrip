@@ -38,8 +38,6 @@ export class AppComponent {
   
 
   constructor(public afAuth: AngularFireAuth, private searchService: SearchService) { 
-    console.log("wer");
-    console.log(mapboxgl);
     this.getLocation();
 
     this.user = afAuth.authState;
@@ -51,8 +49,25 @@ export class AppComponent {
     .catch(error => {
       return Observable.of<any[]>([]);
     });
+
   }
 
+  ngOnInit(): void {
+    console.log("wer");
+    console.log(mapboxgl);
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ua3doYW4iLCJhIjoiY2l6OHA1MDZtMDA0cDJxcW9vdXM5OHFpaCJ9.i9qniS0Lz-hc17UGUmFfYw';
+    
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/traffic-night-v2',
+      center: [-79.3832, 43.6532], // starting position
+      zoom: 15 // starting zoom
+    });
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+
+  }
   // Push a search term into the observable stream.
   search(): void {
     this.searchInput.next(this.searchQuery);

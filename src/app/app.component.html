@@ -19,12 +19,16 @@
     <div class="app-nav r">
         <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/20882689_10209383461294031_8391804898909592920_n.jpg?oh=862383b21ca663b287f397f567b19382&oe=5A2635AB"/>
                 
-        <div> {{ (user | async)?.uid }} </div>
+        <div>&nbsp;{{ (user | async)?.displayName }} </div>
         <button (click)="login()">Login</button>
         <button (click)="logout()">Logout</button>
     </div>
     
 </div>
+
+
+
+<div id='map' class="f1"></div>
 
 <div class="search-result-interface r" *ngIf="searchQuery">
 
@@ -36,5 +40,4 @@
     </a>
 
 </div>
-
 <router-outlet></router-outlet>
