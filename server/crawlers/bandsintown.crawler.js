@@ -119,12 +119,14 @@ getArtistData = function(list, i) {
 
 rakeArtistList = function() {
     //remove redundancy in artist names collection
-    db.collection(ARTISTNAME_COLLECTION).aggregate([{$group:{_id:"$username", dups:{$push:"$_id"}, count: {$sum: 1}}},
-        {$match:{count: {$gt: 1}}}
-        ]).forEach(function(doc){
-        doc.dups.shift();
-        db.collection(ARTISTNAME_COLLECTION).remove({_id : {$in: doc.dups}});
-    });
+
+    // db.collection(ARTISTNAME_COLLECTION).aggregate([{$group:{_id:"$username", dups:{$push:"$_id"}, count: {$sum: 1}}},
+    //     {$match:{count: {$gt: 1}}}
+    //     ]).forEach(function(doc){
+    //     doc.dups.shift();
+    //     db.collection(ARTISTNAME_COLLECTION).remove({_id : {$in: doc.dups}});
+    // });
+
     //map crawled artists to the artist names collection
     //remove redundancy in artists collection
     // db.collection(ARTIST_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
@@ -140,40 +142,74 @@ rakeArtistList = function() {
     //     db.collection(ARTIST_COLLECTION).remove({_id : {$in: doc.dups}});
     // });
 
-    var stream = db.collection(EVENT_COLLECTION).find({}).stream();
+    // var stream_venues = db.collection(EVENT_COLLECTION).find({}).stream();
 
-    var venues = [];
+    // var venues = [];
 
-    stream.on('data', function(doc) {
-        venues.push(doc.venue);
+    // stream_venues.on('data', function(doc) {
+    //     venues.push(doc.venue);
+    // });
+    // stream_venues.on('error', function(err) {
+    //     console.log(err);
+    // });
+    // stream_venues.on('end', function() {
+    //     console.log('All done!');
+    //     console.log(venues.length);
+    //     var index = 0;
+    //     var len = venues.length;
+    //     while(index < len){
+    //         var venue = venues[index];
+    //         var i = 0;
+    //         while(i < len){
+    //             if(venues[i].latitude == venue.latitude && venues[i].longitude == venue.longitude && i != index){
+    //                 venues.splice(i,1);
+    //                 len--;
+    //                 i++;
+    //             }else{
+    //                 i++;
+    //             }
+    //         }
+    //         index++;
+    //     }
+    //     console.log(venues.length);
+    //     db.collection(VENUE_COLLECTION).insertMany(venues,(err,doc)=>{
+    //         if(err){console.log(err)}
+    //     });
+        
+    // });
+
+    var stream_artists = db.collection(ARTIST_COLLECTION).find({}).stream();
+
+
+    stream_artists.on('data', function(doc) {
+        console.log(typeof(doc));
+        const query = {
+            text: 'INSERT INTO artists(name, img_url, img_url_thumb, source, created_at, updated_at, num_fans) VALUES($1, $2, $3, $4, $5, $6, $7)',
+            values: [
+                doc.name,
+                doc.image_url,
+                doc.thumb_url,
+                "bandsintown",
+                new Date(),
+                new Date(),
+                parseInt(doc.tracker_count)
+            ],
+        }
+        
+        // callback
+        pgClient.query(query, (err, res) => {
+            if (err) {
+                console.log(err.stack)
+            } else {
+                console.log(res.rows[0])
+            }
+        })
     });
-    stream.on('error', function(err) {
+    stream_artists.on('error', function(err) {
         console.log(err);
     });
-    stream.on('end', function() {
+    stream_artists.on('end', function() {
         console.log('All done!');
-        console.log(venues.length);
-        var index = 0;
-        var len = venues.length;
-        while(index < len){
-            var venue = venues[index];
-            var i = 0;
-            while(i < len){
-                if(venues[i].latitude == venue.latitude && venues[i].longitude == venue.longitude && i != index){
-                    venues.splice(i,1);
-                    len--;
-                    i++;
-                }else{
-                    i++;
-                }
-            }
-            index++;
-        }
-        console.log(venues.length);
-        db.collection(VENUE_COLLECTION).insertMany(venues,(err,doc)=>{
-            if(err){console.log(err)}
-        });
-        
     });
 
     // db.collection(ARTIST_COLLECTION).find({}).toArray((err, docs) => {

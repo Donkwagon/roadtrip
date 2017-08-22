@@ -14,14 +14,20 @@ const pgClient = new Client({
     port: 5432,
 })
 
-pgClient.connect()
+pgClient.connect((err) => {
+    if (err) {
+        console.error('connection error', err.stack)
+    } else {
+        console.log('connected')
+    }
+});
   
 global.pgClient = pgClient;
 
-pgClient.query('SELECT NOW()', (err, res) => {
-    console.log(err, res)
-    pgClient.end()
-})
+// pgClient.query('SELECT NOW()', (err, res) => {
+//     console.log(err, res)
+//     pgClient.end()
+// })
 
 //////////////////////////////////////////
 //Initialize app and start express server
