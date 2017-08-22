@@ -4,6 +4,26 @@ var mongoose =        require('mongoose');
 var http =            require('http');
 
 //////////////////////////////////////////
+//Connect to postgre database
+const { Client } = require('pg');
+const pgClient = new Client({
+    user: 'Donkw',
+    host: 'rodie.ckeovenu9w7r.us-east-1.rds.amazonaws.com',
+    database: 'rodie',
+    password: 'Idhap007',
+    port: 5432,
+})
+
+pgClient.connect()
+  
+global.pgClient = pgClient;
+
+pgClient.query('SELECT NOW()', (err, res) => {
+    console.log(err, res)
+    pgClient.end()
+})
+
+//////////////////////////////////////////
 //Initialize app and start express server
 var app = express();
 app.use(bodyParser.json());
