@@ -19,6 +19,7 @@ export class ArtistComponent implements OnInit {
   artistName: string;
   artist: any;
   events: Event[];
+  curDate: Date;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,8 @@ export class ArtistComponent implements OnInit {
     private eventService: EventService) { }
 
   ngOnInit() {
+
+    this.curDate = new Date();
     
     this.sub = this.route.params.subscribe(params => {
       this.artistName = params['artistName'];
