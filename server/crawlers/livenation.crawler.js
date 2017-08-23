@@ -16,7 +16,7 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-crawler.get("", function(req, res) {getVenue(20187);});
+crawler.get("", function(req, res) {getVenue(15000);});
 
 getVenue = function(id) {
 
@@ -41,7 +41,7 @@ getVenue = function(id) {
                 }
             }
 
-            id++;
+            id--
             getVenue(id);
 
         });

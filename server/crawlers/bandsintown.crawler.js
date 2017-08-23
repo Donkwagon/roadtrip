@@ -141,6 +141,19 @@ rakeArtistList = function() {
     //     doc.dups.shift();
     //     db.collection(ARTIST_COLLECTION).remove({_id : {$in: doc.dups}});
     // });
+    db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$bc_id", dups:{$push:"$_id"}, count: {$sum: 1}}},
+        {$match:{count: {$gt: 1}}}
+        ]).forEach(function(doc){
+        doc.dups.shift();
+        db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
+    });
+
+    db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
+        {$match:{count: {$gt: 1}}}
+        ]).forEach(function(doc){
+        doc.dups.shift();
+        db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
+    });
 
     // var stream_venues = db.collection(EVENT_COLLECTION).find({}).stream();
 

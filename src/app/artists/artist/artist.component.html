@@ -1,11 +1,22 @@
 <div *ngIf="artist">
-  <img class="artist-background-image" [src]="artist.image_url"/>
-  <div class="artist-interface r">
+  <div class="artist-interface c">
     <div class="artist-info-wrapper c">
-      <img class="artist-profile-image" [src]="artist.image_url"/>
-      <p>
-        {{artist.name}} | {{artist.upcoming_event_count}} | {{artist.tracker_count}}
-      </p>
+      <div class="cover-image-wrapper">
+          <img class="artist-profile-image" [src]="artist.image_url"/>
+      </div>
+      <div class="cover-info-wrapper c">
+        <div class="cover-info-inner-wrapper f1 c">
+          <div class="f1"></div>
+          <div class="r">
+            <div class="artist-name">{{artist.name}}</div>
+            <p>
+              {{artist.upcoming_event_count}} | {{artist.tracker_count}}
+            </p>
+          </div>
+        </div>
+          
+      </div>
+   
     </div>
     <div class="events-wrapper">
       <table>
@@ -19,7 +30,7 @@
           <td>{{event.datetime | date:'MMM d'}}</td>
           <td>{{event.venue.name}}</td>
           <td>{{event.venue.city}}, {{event.venue.region}}</td>
-          <td><a href="{{event.url}}" target="_blank">Tickets</a></td>
+          <td><a href="{{event.url}}" target="_blank"><i class="fa fa-ticket" aria-hidden="true"></i></a></td>
         </tr>
       </table>
     </div>
