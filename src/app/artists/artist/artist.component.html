@@ -1,22 +1,48 @@
 <div *ngIf="artist">
+
   <div class="artist-interface c">
+
     <div class="artist-info-wrapper c">
+
       <div class="cover-image-wrapper">
           <img class="artist-profile-image" [src]="artist.image_url"/>
       </div>
+
       <div class="cover-info-wrapper c">
+
         <div class="cover-info-inner-wrapper f1 c">
           <div class="f1"></div>
           <div class="r">
             <div class="artist-name">{{artist.name}}</div>
-            <p>
-              {{artist.upcoming_event_count}} | {{artist.tracker_count}}
-            </p>
           </div>
+          <div class="r">
+              <div class="cover-follow-btn">
+                Follow
+              </div>
+              &nbsp;
+              <div class="cover-follow-btn">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>                  
+              </div>
+          </div>
+
         </div>
           
       </div>
    
+    </div>
+    <div class="interface-nav-wrapper r">
+        <div class="interface-nav">
+          SHOWS({{artist.upcoming_event_count}})
+        </div>
+        <div class="interface-nav">
+          INFO
+        </div>
+        <div class="interface-nav">
+          FANS({{artist.tracker_count}})
+        </div>
+        <div class="interface-nav">
+          SOCIAL
+        </div>
     </div>
     <div class="events-wrapper c">
       <table>
