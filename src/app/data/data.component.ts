@@ -31,6 +31,12 @@ export class DataComponent implements OnInit {
       console.log(res);
     });
   }
+  
+  getVenuesFromLivenation() {
+    this.crawlerService.getVenuesFromLivenation().then(res => {
+      console.log(res);
+    });
+  }
 
   
   getUpcomingEvents() {

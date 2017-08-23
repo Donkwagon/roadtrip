@@ -1,11 +1,14 @@
 const express = require('express');
 const crawler = express.Router();
+
 var EVENT_COLLECTION = "events";
 var ARTIST_COLLECTION = "artists";
+var VENUE_COLLECTION = "venues";
+
 var request =     require('request');
 var cheerio =     require('cheerio');
 
-var ObjectID = require('mongodb').ObjectID;
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36';
 
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
@@ -13,28 +16,35 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-crawler.get("", function(req, res) {
-    var artist = "GunsN'Roses";
-    var root = "http://bandsintown.com/";
-    var URL = root + artists;
-    var UserAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36';
+crawler.get("", function(req, res) {getVenue(20187);});
+
+getVenue = function(id) {
+
+    var URL = "https://api.livenation.com/venues/" + id + ".json";
     var req = request.defaults({jar: true,rejectUnauthorized: false,followAllRedirects: true});
+    
+        req.get({url: URL,headers: {'User-Agent': USER_AGENT}},(error, response, body) =>{
 
-    req.get({url: URL,headers: {'User-Agent': UserAgent}},(error, response, html) =>{
+            console.log(id + ": " + response.statusCode);
 
-        if(error||response.statusCode != 200){
-            
-            console.log(response);
+            if(response){
+                if(error||response.statusCode != 200){
+                    console.log(response.statusCode);
+                }else{
+                    body = JSON.parse(body);
+                    if(body.data){
+                        db.collection(VENUE_COLLECTION).insertOne(body.data,(err,doc)=>{
+                            if(err){console.log(err)}
+                            else{console.log("T");}
+                        });
+                    }
+                }
+            }
 
-        }else{
+            id++;
+            getVenue(id);
 
-            console.log(html);
-
-        }
-    });
-
-
-
-});
+        });
+}
 
 module.exports = crawler;

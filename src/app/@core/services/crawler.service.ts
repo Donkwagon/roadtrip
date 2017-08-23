@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CrawlerService {
 
-    private CrawlersUrl = '/apis/crawlers/bandsintown';
+    private CrawlersUrl = '/apis/crawlers';
 
     constructor (private http: Http) {}
 
@@ -17,21 +17,29 @@ export class CrawlerService {
     }
 
     rakeArtistList(): Promise<String[] | void> {
-      return this.http.get(this.CrawlersUrl + "/rake")
+      return this.http.get(this.CrawlersUrl + "/bandsintown/rake")
                  .toPromise()
                  .then(response => response.json() as String[])
                  .catch(this.handleError);
     }
 
     getArtistInfo(): Promise<String[] | void> {
-      return this.http.get(this.CrawlersUrl + "/artistinfo")
+      return this.http.get(this.CrawlersUrl + "/bandsintown/artistinfo")
+                 .toPromise()
+                 .then(response => response.json() as String[])
+                 .catch(this.handleError);
+    }
+
+
+    getVenuesFromLivenation(): Promise<String[] | void> {
+      return this.http.get(this.CrawlersUrl + "/livenation/")
                  .toPromise()
                  .then(response => response.json() as String[])
                  .catch(this.handleError);
     }
 
     getUpcomingEvents(): Promise<String[] | void> {
-      return this.http.get(this.CrawlersUrl + "/upcomingevents")
+      return this.http.get(this.CrawlersUrl + "/bandsintown/upcomingevents")
                  .toPromise()
                  .then(response => response.json() as String[])
                  .catch(this.handleError);
