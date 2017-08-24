@@ -8,7 +8,7 @@
     position: absolute;
     top:0em;left:0;
     z-index:2;
-    width:490px;
+    width:500px;
 
     .artist-info-wrapper{
         position:relative;
@@ -65,11 +65,13 @@
 
     .interface-nav-wrapper{
         background-color:rgba(12,12,12,0.9);
-        color:#AAA;
+        color:#999;
+        justify-content: stretch;
 
         .interface-nav{
             padding:0.5em 1em;
             letter-spacing:2px;
+            text-align: center;
 
             &:hover{
                 cursor: pointer;

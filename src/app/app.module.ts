@@ -12,6 +12,7 @@ import { LocationStrategy }                  from '@angular/common';
 import { HashLocationStrategy }              from '@angular/common';
 
 import { AppRoutingModule }                  from './app-routing.module';
+import { AuthService } from './auth/auth.service';
 
 import { AppComponent } from './app.component';
 import { DataComponent } from './data/data.component';
@@ -41,6 +42,7 @@ import { ArtistsOverallComponent } from './artists/artists-overall/artists-overa
     AngularFireAuthModule
   ],
   providers: [
+    AuthService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
