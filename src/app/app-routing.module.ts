@@ -8,6 +8,7 @@ import { ArtistsOverallComponent } from './artists/artists-overall/artists-overa
 import { VenuesComponent } from './venues/venues.component';
 import { EventsComponent } from './events/events.component';
 import { ArtistComponent } from './artists/artist/artist.component';
+import { CallbackComponent } from './callback/callback.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
     { path: ':artistName', component: ArtistComponent},
   ]},
   { path: 'venues', component: VenuesComponent},
-  { path: 'events', component: EventsComponent}
+  { path: 'events', component: EventsComponent},
+  { path: 'callback', component: CallbackComponent}
 
 ];
 

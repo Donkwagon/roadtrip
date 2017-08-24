@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import * as mapboxgl from 'mapbox-gl';
+import { AuthService } from './auth/auth.service';
 
 import { SearchService } from './@core/services/search.service';
 
@@ -37,7 +38,8 @@ export class AppComponent {
   user: Observable<firebase.User>;
   
 
-  constructor(public afAuth: AngularFireAuth, private searchService: SearchService) { 
+  constructor(public auth: AuthService, public afAuth: AngularFireAuth, private searchService: SearchService) { 
+    auth.handleAuthentication();
     this.getLocation();
 
     this.user = afAuth.authState;

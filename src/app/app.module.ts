@@ -21,6 +21,7 @@ import { VenuesComponent } from './venues/venues.component';
 import { EventsComponent } from './events/events.component';
 import { ArtistComponent } from './artists/artist/artist.component';
 import { ArtistsOverallComponent } from './artists/artists-overall/artists-overall.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ArtistsOverallComponent } from './artists/artists-overall/artists-overa
     VenuesComponent,
     EventsComponent,
     ArtistComponent,
-    ArtistsOverallComponent
+    ArtistsOverallComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
