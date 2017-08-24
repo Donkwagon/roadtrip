@@ -135,25 +135,25 @@ rakeArtistList = function() {
     //     doc.dups.shift();
     //     db.collection(ARTIST_COLLECTION).remove({_id : {$in: doc.dups}});
     // });
-    // db.collection(EVENT_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
+    db.collection(EVENT_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
+        {$match:{count: {$gt: 1}}}
+        ]).forEach(function(doc){
+        doc.dups.shift();
+        db.collection(EVENT_COLLECTION).remove({_id : {$in: doc.dups}});
+    });
+    // db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$bc_id", dups:{$push:"$_id"}, count: {$sum: 1}}},
     //     {$match:{count: {$gt: 1}}}
     //     ]).forEach(function(doc){
     //     doc.dups.shift();
-    //     db.collection(ARTIST_COLLECTION).remove({_id : {$in: doc.dups}});
+    //     db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
     // });
-    db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$bc_id", dups:{$push:"$_id"}, count: {$sum: 1}}},
-        {$match:{count: {$gt: 1}}}
-        ]).forEach(function(doc){
-        doc.dups.shift();
-        db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
-    });
 
-    db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
-        {$match:{count: {$gt: 1}}}
-        ]).forEach(function(doc){
-        doc.dups.shift();
-        db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
-    });
+    // db.collection(VENUE_COLLECTION).aggregate([{$group:{_id:"$id", dups:{$push:"$_id"}, count: {$sum: 1}}},
+    //     {$match:{count: {$gt: 1}}}
+    //     ]).forEach(function(doc){
+    //     doc.dups.shift();
+    //     db.collection(VENUE_COLLECTION).remove({_id : {$in: doc.dups}});
+    //});
 
     // var stream_venues = db.collection(EVENT_COLLECTION).find({}).stream();
 
@@ -191,39 +191,39 @@ rakeArtistList = function() {
         
     // });
 
-    var stream_artists = db.collection(ARTIST_COLLECTION).find({}).stream();
+    // var stream_artists = db.collection(ARTIST_COLLECTION).find({}).stream();
 
 
-    stream_artists.on('data', function(doc) {
-        console.log(typeof(doc));
-        const query = {
-            text: 'INSERT INTO artists(name, img_url, img_url_thumb, source, created_at, updated_at, num_fans) VALUES($1, $2, $3, $4, $5, $6, $7)',
-            values: [
-                doc.name,
-                doc.image_url,
-                doc.thumb_url,
-                "bandsintown",
-                new Date(),
-                new Date(),
-                parseInt(doc.tracker_count)
-            ],
-        }
+    // stream_artists.on('data', function(doc) {
+    //     console.log(typeof(doc));
+    //     const query = {
+    //         text: 'INSERT INTO artists(name, img_url, img_url_thumb, source, created_at, updated_at, num_fans) VALUES($1, $2, $3, $4, $5, $6, $7)',
+    //         values: [
+    //             doc.name,
+    //             doc.image_url,
+    //             doc.thumb_url,
+    //             "bandsintown",
+    //             new Date(),
+    //             new Date(),
+    //             parseInt(doc.tracker_count)
+    //         ],
+    //     }
         
-        // callback
-        pgClient.query(query, (err, res) => {
-            if (err) {
-                console.log(err.stack)
-            } else {
-                console.log(res.rows[0])
-            }
-        })
-    });
-    stream_artists.on('error', function(err) {
-        console.log(err);
-    });
-    stream_artists.on('end', function() {
-        console.log('All done!');
-    });
+    //     // callback
+    //     pgClient.query(query, (err, res) => {
+    //         if (err) {
+    //             console.log(err.stack)
+    //         } else {
+    //             console.log(res.rows[0])
+    //         }
+    //     })
+    // });
+    // stream_artists.on('error', function(err) {
+    //     console.log(err);
+    // });
+    // stream_artists.on('end', function() {
+    //     console.log('All done!');
+    // });
 
     // db.collection(ARTIST_COLLECTION).find({}).toArray((err, docs) => {
     //     if(err){console.log(err);}
